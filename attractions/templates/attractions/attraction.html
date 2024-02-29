@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Attraction</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    input[type="text"], input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Attraction</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+        
+        <label for="place"> Location:</label>
+        <input type="text" id="place" name="place" placeholder="Enter place Location">
+
+        <label for="name">Name:</label>
+        <input type="text" id="place" name="name" placeholder="Enter place name">
+        
+        <label for="description">Description (max 500 words):</label>
+        <textarea id="description" name="description" placeholder="Enter description"  oninput="countWords(this)" required></textarea>
+        
+        <button type="submit">Add Attraction</button>
+    </formd>
+</div>
+<script>
+    function countWords(element) {
+        var words = element.value.trim().split(/\s+/);
+        if (words.length > 500) {
+            var limitedWords = words.slice(0, 500).join(" ");
+            element.value = limitedWords;
+            alert("Maximum word limit reached (500 words)");
+        }
+    }
+</script>
+
+</body>
+</html>
